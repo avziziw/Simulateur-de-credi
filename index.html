@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Simulateur de crédit</title>
+<title>Simulateur de crédit BY m@LK</title>
 <meta name="theme-color" content="#0f7a5f">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icons/icon-192.png">
@@ -77,14 +77,14 @@ tbody th{font-weight:500}
 <body>
 <main class="wrap">
   <h1>Simulateur de crédit</h1>
-  <p class="sub">Renseignez votre projet : vous obtenez la mensualité, le coût total et le tableau d’amortissement, avec un éventuel prêt à taux réduit.</p>
+  <p class="sub">Renseignez votre projet (Pris du bien ) : vous obtenez la mensualité, le coût total et le tableau d’amortissement, avec un éventuel prêt à taux réduit.</p>
 
   <div class="grid">
     <form id="f" onsubmit="return false" novalidate>
       <div class="field">
         <label for="prix">Prix du bien</label>
         <div class="row">
-          <input type="range" id="prix-r" min="20000" max="1500000" step="5000" value="250000" aria-label="Prix du bien, curseur">
+          <input type="range" id="prix-r" min="150000" max="1500000" step="5000" value="250000" aria-label="Prix du bien, curseur">
           <div class="num"><input type="number" id="prix" min="0" step="1000" value="250000" inputmode="decimal"><span>€</span></div>
         </div>
       </div>
@@ -136,7 +136,7 @@ tbody th{font-weight:500}
       </div>
       <div class="field solo">
         <label for="revenus">Revenu mensuel net du foyer</label>
-        <div class="num"><input type="number" id="revenus" min="0" step="100" value="4500" inputmode="decimal"><span>€</span></div>
+        <div class="num"><input type="number" id="revenus" min="0" step="100" value="3000" inputmode="decimal"><span>€</span></div>
       </div>
     </form>
 
@@ -186,7 +186,7 @@ tbody th{font-weight:500}
     </div>
   </section>
 
-  <p class="note">Simulation indicative, sans valeur contractuelle : seule l’offre de prêt de votre banque fait foi. Les frais de notaire sont estimés à 7,5 % du prix pour un bien ancien et 2,5 % pour un bien neuf, un ordre de grandeur qui varie selon le département et le bien. Le montant à emprunter est le prix du bien moins l’apport net. Les mensualités sont constantes pour chaque prêt. Le TAEG est estimé à partir des données saisies. Repère : les banques limitent en général le taux d’endettement à 35 % des revenus, assurance comprise.</p>
+  <p class="note">Simulation indicative, seule l’offre de prêt de votre banque fait foi. Les frais de notaire sont estimés à 7,5 % du prix pour un bien ancien et 2,5 % qui varie selon votre département et le bien. Le montant à emprunter est le prix du bien moins l’apport net. Les mensualités sont constantes pour chaque prêt. Le TAEG est estimé à partir des données saisies. Repère : les banques limitent en général le taux d’endettement à 35 % des revenus, assurance comprise.</p>
 </main>
 
 <script>
