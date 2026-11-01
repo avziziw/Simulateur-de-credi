@@ -1,1 +1,67 @@
+name: Creer APK Android
 
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Recuperer les fichiers GitHub
+        uses: actions/checkout@v4
+
+      - name: Installer Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Installer Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Configurer Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Installer les outils Android
+        run: |
+          sdkmanager "platforms;android-35" "build-tools;35.0.0"
+
+      - name: Preparer les fichiers du site
+        run: |
+          mkdir -p "$RUNNER_TEMP/apk-project/www"
+          rsync -av \
+            --exclude='.git' \
+            --exclude='.github' \
+            --exclude='node_modules' \
+            "$GITHUB_WORKSPACE/" \
+            "$RUNNER_TEMP/apk-project/www/"
+          test -f "$RUNNER_TEMP/apk-project/www/index.html"
+
+      - name: Creer le projet Capacitor
+        run: |
+          cd "$RUNNER_TEMP/apk-project"
+          npm init -y
+          npm install @capacitor/core@7 @capacitor/android@7
+          npm install --save-dev @capacitor/cli@7
+          npx cap init "Simulateur Credit" "com.simulateur.credit" --web-dir www
+          npx cap add android
+          npx cap sync android
+
+      - name: Compiler APK
+        run: |
+          cd "$RUNNER_TEMP/apk-project/android"
+          chmod +x gradlew
+          ./gradlew assembleDebug --no-daemon
+
+      - name: Rendre APK telechargeable
+        uses: actions/upload-artifact@v4
+        with:
+          name: simulateur-credit-apk
+          path: ${{ runner.temp }}/apk-project/android/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
