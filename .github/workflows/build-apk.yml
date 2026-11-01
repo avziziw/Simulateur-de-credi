@@ -27,9 +27,6 @@ jobs:
 
       - name: Configurer Android SDK
         uses: android-actions/setup-android@v4
-        with:
-          packages:
-        platform-tools
 
       - name: Installer les outils Android
         run: |
